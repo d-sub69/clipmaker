@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+tiktok_auth.json
+watcher.pid
+*.db
+*.log
+.claude/
+CLAUDE.md
+*.mp4
+*.mkv

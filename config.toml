@@ -1,0 +1,60 @@
+# TikTok clip maker - settings.
+# After editing, restart the background task:  double-click restart.bat
+
+[paths]
+root = 'D:\TikTok'          # 01_inbox, 02_processing, 03_output, 99_failed, logs are created here
+keep_source = true          # keep the original video in 03_output\<name>\_source
+
+[watch]
+poll_seconds = 10
+stable_seconds = 15         # file must be untouched this long (download finished) before it's picked up
+open_folder_when_done = true
+
+[split]
+interval_seconds = 300          # exactly 5 min per part
+snap_to_sentence = false        # false = cut at the exact interval
+snap_window_seconds = 30        # how far a cut may move from the exact interval (+-)
+min_last_part_seconds = 15       # a shorter leftover at the end is merged into the previous part
+
+[whisper]
+model = "small"             # tiny / base / small / medium / large-v3   (bigger = more accurate, slower)
+language = ""               # "" = auto-detect, or "en", "uk", "ru", ...
+device = "cpu"              # "cuda" if you have an NVIDIA GPU with CUDA 12 + cuDNN 9 (5-10x faster)
+
+[captions]
+enabled = true
+font = "Arial"
+font_size = 60
+margin_bottom = 520         # px from the bottom; keeps captions above TikTok's buttons/description
+max_words = 6               # words per caption line
+max_chars = 32
+max_dur = 2.2
+uppercase = true
+highlight = "00E5FF"        # colour of the word being spoken (BBGGRR, this is yellow). "" = off
+part_label = true           # burn "<video name> Part N" at the top of every part
+title_format = "{name} Part {part}/{total}"   # placeholders: {name} {part} {total}
+title_opacity = 0.85        # 1 = solid white lettering, lower = more see-through
+title_box = false           # true = black box behind the title (old look)
+title_size = 52             # font size of that title
+label_seconds = 0           # 0 = show it for the whole part, or e.g. 5 = only the first 5 seconds
+
+[video]
+fit = "blur"                # "blur" = whole frame on a blurred background | "crop" = fill the screen, cut sides
+preset = "medium"           # "faster" renders quicker with slightly bigger files
+crf = 20                    # quality: 18 = better/bigger, 23 = smaller
+
+[text]
+# Text written to partNN.txt / _captions_to_paste.txt for you to paste into TikTok.
+default_credit = ""                          # used when the video isn't in a creator sub-folder
+title_format = "{name}"
+credit_caption_format = ""                   # empty = no credit line in the post text
+credit_on_video_format = ""                  # empty = no credit label on the video
+footer = "Follow for the next part!"
+hashtags = ["#fyp"]
+
+[ad]
+enabled = false             # turn on when the ad is ready
+text = "Your offer here · link in bio"
+mode = "end"                # "end" | "start" | "full"
+seconds = 4
+color = "3B2BFE"            # banner background, BBGGRR
